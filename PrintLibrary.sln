@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{13CB421F-FBBC-4E28-9CE2-A3C091F9D6CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{48C51E47-607B-4671-AE84-9060E50E2323} = {48C51E47-607B-4671-AE84-9060E50E2323}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintLibrary", "PrintLibrary\PrintLibrary.csproj", "{48C51E47-607B-4671-AE84-9060E50E2323}"
 EndProject

@@ -25,7 +25,7 @@ namespace TestApp
         public MainWindow()
         {
             InitializeComponent();
-            testPrinting.UpdateListofPrinters();
+            //testPrinting.UpdateListofPrinters();
             UICBListPrinters.ItemsSource = testPrinting.GetListofPrinters();
         }
 
