@@ -22,7 +22,7 @@ namespace PrintLibrary
         /// <param name="height">Height document</param>
         /// <param name="width">Width document</param>
         /// <param name="updateon">Param for run UpdateListofPrinters</param>
-        public PrintDocument(int height = 800, int width = 800, bool updateon = true)
+        public PrintDocument(double height = 800, double width = 800, bool updateon = true)
         {
             if (updateon)
                 UpdateListofPrinters();
