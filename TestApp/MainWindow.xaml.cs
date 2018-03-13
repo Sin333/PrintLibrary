@@ -21,7 +21,7 @@ namespace TestApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        PrintDocument testPrinting = new PrintDocument();
+        PrintDocument testPrinting = new PrintDocument(MainWindow.UI);
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +33,11 @@ namespace TestApp
         {
             //testPrinting.SelectionPrinter(UICBListPrinters.SelectedItem.ToString());
             testPrinting.PrintingDocumentTest(1);
+        }
+
+        private void UICBListPrinters_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            testPrinting.SelectionPrinter(UICBListPrinters.SelectedItem.ToString());
         }
     }
 }

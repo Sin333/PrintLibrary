@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel>
-            <ComboBox x:Name="UICBListPrinters"/>
+            <ComboBox x:Name="UICBListPrinters" SelectionChanged="UICBListPrinters_SelectionChanged"/>
             <Button x:Name="UIBRun" Content="TestPrint" Click="UIBRun_Click"/>
         </StackPanel>
     </Grid>

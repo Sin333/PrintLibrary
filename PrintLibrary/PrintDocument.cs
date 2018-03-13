@@ -7,6 +7,10 @@ using System.Windows.Documents;
 
 namespace PrintLibrary
 {
+    /// <summary>
+    /// If you need Print UIElement:
+    /// -In Center You need UIElemnt in a Height and Width = PrintDocument(Height,Width)
+    /// </summary>
     public class PrintDocument
     {
         FixedDocument document = new FixedDocument();
@@ -39,6 +43,8 @@ namespace PrintLibrary
         /// <returns></returns>
         public List<string> GetListofPrinters()
         {
+            if (printerList == null)
+                UpdateListofPrinters();
             return printerList;
         }
 
@@ -150,8 +156,10 @@ namespace PrintLibrary
 
             fixedPage.Width = document.DocumentPaginator.PageSize.Width;
             fixedPage.Height = document.DocumentPaginator.PageSize.Height;
-            PageContent contentpage = new PageContent();
-            contentpage.Child = fixedPage;
+            PageContent contentpage = new PageContent
+            {
+                Child = fixedPage
+            };
 
             document.Pages.Add(contentpage);
         }

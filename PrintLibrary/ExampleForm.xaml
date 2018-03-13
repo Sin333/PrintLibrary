@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:PrintLibrary"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
+      Background="LightYellow"
       Title="ExampleForm">
 
-    <Grid x:Name="UIGrid" Background="White" Height="800" Width="800">
+    <Grid x:Name="UIGrid" Background="LightGray" Height="800" Width="800">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="This is a text for example printing this library."/>
             <TextBlock Text="C# best of the best" HorizontalAlignment="Center"/>
