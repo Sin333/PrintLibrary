@@ -30,6 +30,18 @@ namespace PrintLibrary
         }
 
         /// <summary>
+        /// Check Selected printer
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSelectedPrinter()
+        {
+            if (printQueue == null)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
         /// Get all PrinterNames from the system
         /// </summary>
         public void UpdateListofPrinters()
