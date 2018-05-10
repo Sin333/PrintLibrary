@@ -11,22 +11,22 @@ namespace PrintLibrary
     /// If you need Print UIElement:
     /// -In Center You need UIElemnt in a Height and Width = PrintDocument(Height,Width)
     /// </summary>
-    public class PrintDocument
+    public class PrintLibraryClass
     {
-        FixedDocument document = new FixedDocument();
-        List<string> printerList;
-        PrintQueue printQueue;
+        private FixedDocument Document = new FixedDocument();
+        private List<string> PrinterList;
+        private PrintQueue PrintQueue;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="height">Height document</param>
         /// <param name="width">Width document</param>
         /// <param name="updateon">Param for run UpdateListofPrinters</param>
-        public PrintDocument(double height = 800, double width = 800, bool updateon = true)
+        public PrintLibraryClass(double height = 800, double width = 800, bool updateon = true)
         {
             if (updateon)
                 UpdateListofPrinters();
-            document.DocumentPaginator.PageSize = new Size { Height = height, Width = width };
+            Document.DocumentPaginator.PageSize = new Size { Height = height, Width = width };
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace PrintLibrary
         /// <returns></returns>
         public bool IsSelectedPrinter()
         {
-            if (printQueue == null)
+            if (PrintQueue == null)
                 return false;
             else
                 return true;
@@ -46,7 +46,7 @@ namespace PrintLibrary
         /// </summary>
         public void UpdateListofPrinters()
         {
-            printerList = new LocalPrintServer().GetPrintQueues().Where(x => x.CurrentJobSettings.CurrentPrintTicket.OutputColor != null).Select(x => x.FullName).ToList();
+            PrinterList = new LocalPrintServer().GetPrintQueues().Where(x => x.CurrentJobSettings.CurrentPrintTicket.OutputColor != null).Select(x => x.FullName).ToList();
         }
 
         /// <summary>
@@ -55,9 +55,17 @@ namespace PrintLibrary
         /// <returns></returns>
         public List<string> GetListofPrinters()
         {
-            if (printerList == null)
+            if (PrinterList == null)
                 UpdateListofPrinters();
-            return printerList;
+            return PrinterList;
+        }
+
+        /// <summary>
+        /// Return Document for printing
+        /// </summary>
+        public FixedDocument GetDocumentPrinting()
+        {
+            return Document;
         }
 
         /// <summary>
@@ -65,7 +73,7 @@ namespace PrintLibrary
         /// </summary>
         public void CleaningDocument()
         {
-            document = new FixedDocument();
+            Document = new FixedDocument();
         }
 
         /// <summary>
@@ -75,9 +83,9 @@ namespace PrintLibrary
         /// <returns></returns>
         public bool SelectionPrinter(int Index)
         {
-            if (printerList.Count > Index)
+            if (PrinterList.Count > Index)
             {
-                printQueue = new PrintQueue(new PrintServer(), printerList.ElementAt(Index));
+                PrintQueue = new PrintQueue(new PrintServer(), PrinterList.ElementAt(Index));
                 return true;
             }
             else
@@ -93,9 +101,9 @@ namespace PrintLibrary
         /// <returns></returns>
         public bool SelectionPrinter(string PrinterName)
         {
-            if (printerList.Contains(PrinterName))
+            if (PrinterList.Contains(PrinterName))
             {
-                printQueue = new PrintQueue(new PrintServer(), PrinterName);
+                PrintQueue = new PrintQueue(new PrintServer(), PrinterName);
                 return true;
             }
             else
@@ -113,13 +121,13 @@ namespace PrintLibrary
         {
             PrintDialog pd = new PrintDialog
             {
-                PrintQueue = printQueue
+                PrintQueue = PrintQueue
             };
 
-            ExampleForm exampleForm = new ExampleForm(); 
+            ExampleForm exampleForm = new ExampleForm();
             AddedTicketforDocument(exampleForm, exampleForm.UIGrid);
 
-            pd.PrintDocument(document.DocumentPaginator, description);
+            pd.PrintDocument(Document.DocumentPaginator, description);
             CleaningDocument();
         }
 
@@ -127,7 +135,7 @@ namespace PrintLibrary
         {
             PrintDialog pd = new PrintDialog
             {
-                PrintQueue = printQueue
+                PrintQueue = PrintQueue
             };
 
             ExampleForm exampleForm;
@@ -137,19 +145,33 @@ namespace PrintLibrary
                 AddedTicketforDocument(exampleForm, exampleForm.UIGrid);
             }
 
-            pd.PrintDocument(document.DocumentPaginator, description);
+            pd.PrintDocument(Document.DocumentPaginator, description);
             CleaningDocument();
         }
 
+        /// <summary>
+        /// Print FixedDocument in this Library, after ClearingDocument()
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="description"></param>
         public void PrintingDocument(string description = "Printing document")
         {
-            PrintDialog pd = new PrintDialog
-            {
-                PrintQueue = printQueue
-            };
+            PrintDialog pd = new PrintDialog { PrintQueue = PrintQueue };
+
+            pd.PrintDocument(Document.DocumentPaginator, description);
+            CleaningDocument();
+        }
+
+        /// <summary>
+        /// Print you FixedDocument
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="description"></param>
+        public void PrintingDocument(FixedDocument document, string description = "Printing document")
+        {
+            PrintDialog pd = new PrintDialog { PrintQueue = PrintQueue };
 
             pd.PrintDocument(document.DocumentPaginator, description);
-            CleaningDocument();
         }
 
         /// <summary>
@@ -166,14 +188,14 @@ namespace PrintLibrary
             FixedPage fixedPage = new FixedPage();
             fixedPage.Children.Add(visual);
 
-            fixedPage.Width = document.DocumentPaginator.PageSize.Width;
-            fixedPage.Height = document.DocumentPaginator.PageSize.Height;
+            fixedPage.Width = Document.DocumentPaginator.PageSize.Width;
+            fixedPage.Height = Document.DocumentPaginator.PageSize.Height;
             PageContent contentpage = new PageContent
             {
                 Child = fixedPage
             };
 
-            document.Pages.Add(contentpage);
+            Document.Pages.Add(contentpage);
         }
     }
 }

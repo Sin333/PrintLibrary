@@ -57,7 +57,7 @@
     <Compile Include="ExampleForm.xaml.cs">
       <DependentUpon>ExampleForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PrintDocument.cs">
+    <Compile Include="PrintLibraryClass.cs">
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ExampleForm.xaml">
