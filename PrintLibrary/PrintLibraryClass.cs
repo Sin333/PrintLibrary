@@ -63,18 +63,12 @@ namespace PrintLibrary
         /// <summary>
         /// Return Document for printing
         /// </summary>
-        public FixedDocument GetDocumentPrinting()
-        {
-            return Document;
-        }
+        public FixedDocument DocumentPrinting() => Document;
 
         /// <summary>
         /// Clearning Document for printing
         /// </summary>
-        public void CleaningDocument()
-        {
-            Document = new FixedDocument();
-        }
+        public void CleaningDocument() => Document = new FixedDocument();
 
         /// <summary>
         /// Selection printer in index of list PrintName
@@ -88,10 +82,7 @@ namespace PrintLibrary
                 PrintQueue = new PrintQueue(new PrintServer(), PrinterList.ElementAt(Index));
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            else return false;
         }
 
         /// <summary>
@@ -107,10 +98,7 @@ namespace PrintLibrary
                 return true;
             }
             else
-            {
                 return false;
-            }
-
         }
 
         /// <summary>
@@ -119,10 +107,7 @@ namespace PrintLibrary
         /// <param name="description"></param>
         public void PrintingDocumentTest(string description = "Printing document")
         {
-            PrintDialog pd = new PrintDialog
-            {
-                PrintQueue = PrintQueue
-            };
+            PrintDialog pd = new PrintDialog { PrintQueue = PrintQueue };
 
             ExampleForm exampleForm = new ExampleForm();
             AddedTicketforDocument(exampleForm, exampleForm.UIGrid);
@@ -152,7 +137,6 @@ namespace PrintLibrary
         /// <summary>
         /// Print FixedDocument in this Library, after ClearingDocument()
         /// </summary>
-        /// <param name="document"></param>
         /// <param name="description"></param>
         public void PrintingDocument(string description = "Printing document")
         {
